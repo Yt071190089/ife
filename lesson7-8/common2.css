@@ -1,0 +1,148 @@
+
+body,ul{
+	margin: 0;
+	padding: 0;
+}
+header{
+    width: 100%;
+    height: 68px;
+    background-color: #333;
+}
+
+.head-wrapper{
+	position: relative;
+	width: 960px;
+	height: 68px;
+	margin:0 auto;
+	background-color: #333;
+}
+
+.logo{
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.head-nav{
+	position: absolute;
+	right: 0;
+	top: 5px;
+}
+
+.head-nav ul, .head-nav li{
+	display: inline-block;
+}
+
+.head-nav a{
+   color: #fff;
+}
+
+.banner{
+	width: 100%;
+	min-width: 960px;
+	height: 180px;
+	background-color: #66bb33;
+	position: relative;
+}
+
+.banner-buttons{
+	position: absolute;
+	right: calc(50% - 480px);
+	bottom: 0;
+}
+
+.banner-buttons li{
+	display: inline-block;
+	list-style: none;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	border: 1px solid #000;
+	height: 24px;
+	width: 20px;
+	text-align: center;
+	background-color: rgba(255,255,255,0.5);
+
+}
+
+.banner-buttons .active{
+	padding-top: 8px;
+   	background-color: rgba(255,255,255,1);
+}
+
+.nav{
+	position: relative;
+	width: 100%;
+	min-width: 960px;
+	height: 40px;
+	margin-top: 8px;
+	border-bottom: 1px solid #ccc;
+}
+
+.nav-buttons{
+	position: absolute;
+	font-size: 0;
+	bottom: -1px;
+	left: calc(50% - 480px);
+}
+
+.nav-buttons li{
+	display: inline-block;
+	width: 80px;
+	height: 32px;
+	border:1px solid #ccc;
+	font-size: 14px;
+	line-height: 32px;
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+	background-color: #eee;
+	text-align: center;
+    margin-left: -1px;
+}
+
+.nav-buttons .active1{
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.main{
+	width: 100%;
+	height: 400px;
+	margin-top: 10px;
+}
+
+.wrapper{
+	width: 960px;
+	margin: 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.grid{
+	border:1px solid #ccc;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	height: 100px;
+}
+
+.grid1{
+   flex:1 400px;
+}
+
+.grid2{
+	flex: 1 300px;
+}
+
+.grid3{
+	flex: 1 200px;
+}
+
+.grid4,.grid5,.grid6,.grid7{
+	flex: 1 22%;
+
+}
+.grid8,.grid9,.grid10{
+	flex:1 30%;
+}

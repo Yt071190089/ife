@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自适应布局float,position,flexbox</title>
+	<link rel="stylesheet" type="text/css" href="common1.css">
+</head>
+<body>
+	<h2>两栏布局，左侧30%，右侧70%</h2>
+	<div class="wrapper">
+		<div class="left1">30%</div>
+		<div class="right1">70%</div>
+	</div>
+	<br>
+	<div class="wrapper wrapper2">
+		<div class="left2">30%</div>
+		<div class="right2">70%</div>
+	</div>
+	<br>
+	<div class="wrapper wrapper3">
+		<div class="left3">我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行</div>
+		<div class="right3">70%</div>
+	</div>
+	<h2>两栏布局，左侧固定宽度，右侧自适应</h2>
+
+	<div class="wrapper">
+		<div class="left4">30%</div>
+		<div class="right4">70%</div>
+	</div>
+    <br>
+	<div class="wrapper wapper5">
+		<div class="left5">30%</div>
+		<div class="right5">70%</div>
+	</div>
+    <br>
+	<div class="wrapper wrapper6">
+		<div class="left6">我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行</div>
+		<div class="right6">70%</div>
+	</div>
+
+	<h2>两栏布局，右侧固定宽度，左侧自适应</h2>
+    <div class="wrapper">
+       	<div class="right7">static</div>
+    	<div class="left7">flex</div>
+<!--     	此处左边浮动，然后计算calc(100% - 600px)也可以 -->
+    </div>
+    <br>
+
+    <div class="wrapper wrapper8">
+    	<div class="left8">flex</div>
+    	<div class="right8">static</div>
+    </div>
+    <br>
+
+    <div class="wrapper wrapper9">
+    	<div class="left9">我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行</div>
+    	<div class="right9">static</div>
+    </div>
+
+    <h2>三栏布局，左，右侧固定宽度，中间自适应</h2>
+    <p>圣杯布局</p>
+    <div class="wrapper10">
+        <div class="middle10">flex</div>
+    	<div class="left10">static</div>
+    	<div class="right10">static</div>
+    </div>
+    <br>
+    <p>双飞翼布局</p>
+    <div class="wrapper11">
+    	<div class="main11">
+    		<div class="middle11">flex</div>
+    	</div>
+    	<div class="left11">static</div>
+    	<div class="right11">static</div>
+    </div>
+   <br>
+   
+   <div class="wrapper12">
+   	   <div class="left12">static</div>
+   	   <div class="middle12">flex</div>
+   	   <div class="right12">static</div>
+   </div>
+   <br>
+
+   <div class="wrapper13"> 
+   	  <div class="left13">static</div>
+   	  <div class="middle13">我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行</div>
+   	  <div class="right13">static</div>
+   </div>
+
+    <h2>三栏布局，左，中侧固定宽度，右侧自适应</h2>
+    <div class="wrapper wrapper14">
+    	<div class="left14">static</div>
+    	<div class="middle14">static</div>
+    	<div class="right14">static</div>
+    </div>
+    <br>
+    <div class="wrapper15">
+    	<div class="left15">static</div>
+    	<div class="middle15">static</div>
+    	<div class="right15">flex</div>
+    </div>
+    <br>
+    <div class="wrapper16">
+    	<div class="left16">static</div>
+    	<div class="middle16">static</div>
+    	<div class="right16">我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行我是第一行第一行</div>
+    </div>
+</body>
+</html>
