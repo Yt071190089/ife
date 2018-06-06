@@ -18,9 +18,9 @@ html,body{
 	zoom:1;
 }
 
-/*::-webkit-scrollbar{
+.flex2::-webkit-scrollbar, .siderbar::-webkit-scrollbar,.content::-webkit-scrollbar,.flex2-wrapper::-webkit-scrollbar{
 	width: 0;
-}*/
+}
 
 .wrap{
 	width: 100%;
@@ -64,7 +64,13 @@ html,body{
 .flex2{
 	width: 250px;
 	background-color: rgb(34,44,60);
-	position: relative;    
+	position: relative;
+	display: flex;
+	flex-direction: column; 
+}
+
+.flex2-wrapper{
+	overflow-y: scroll; 
 }
 
 .menu{
@@ -470,14 +476,14 @@ html,body{
 	position: relative;
 }
 
-.mes-pic img{
-	margin-right: 14px;
+.mes-pic img:nth-child(1){
+	margin-right: 7px;
 }
 
 .bigger{
 	position: absolute;
-	top: 28px;
-	left: 220px;
+	top: 25px;
+	left: 214px;
 }
 
 .divide2{
