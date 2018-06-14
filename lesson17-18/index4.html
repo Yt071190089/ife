@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3 times</title>
+</head>
+<body>
+	<button type="" id="button1">开始</button>
+
+	<script type="text/javascript">
+		var btn =document.getElementById("button1");
+		btn.onclick = function(){
+		  for(var i=1;i<101;i++){
+		  	var num1 = Math.floor(i/10);
+		  	var num2= i%10;
+		  	if(i%3==0||num1==3||num2==3){
+		  		console.log("PA");
+		  		continue;
+		  	}
+		  	console.log(i);
+		  }
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Number guessing</title>
+</head>
+<body>
+	<h1>Number guessing game</h1>
+	<p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or less. We'll tell you if your guess was too high or too low.</p>
+	<div>
+		<label for="guessValue">Enter a guess</label>
+		<input type="text" name="" id="guessValue">
+		<input type="submit" name="" id="guessButton">
+	</div>
+    
+    <div id="result">
+	<p id="previousNumber"></p>
+	<p id="isTrue"></p>
+	<p id="highOrLow"></p>
+    </div>
+	<script type="text/javascript">
+		var guessValue =document.getElementById("guessValue");
+		var guessButton = document.getElementById("guessButton");
+		var previousNumber = document.getElementById("previousNumber");
+		var isTrue = document.getElementById("isTrue");
+		var highOrLow = document.getElementById("highOrLow");
+		var count =1;
+        var randomNumber = Math.floor(Math.random()*100+1);
+
+		guessButton.addEventListener("click",guessing);
+		function guessing(){
+			if(count==1){
+				previousNumber.textContent = "previous guess: ";
+			}
+            var nums = Number(guessValue.value);
+            previousNumber.textContent += nums +" ";
+            if(nums==randomNumber){
+             isTrue.textContent = "Congragulations";
+             isTrue.style.color = "green";
+             highOrLow.textContent = "";
+             gameOver();
+            }
+            else if(count==10){
+             isTrue.textContent = "!!!GAME OVER!!!";
+             gameOver();                        	
+            }
+            else{
+             isTrue.textContent = "Wrong";
+             isTrue.style.color = "red";
+             if(nums>randomNumber){
+             	highOrLow.textContent = "The number is too high"
+             }  
+             else if(nums<randomNumber){
+             	highOrLow.textContent = "The number is too low"
+             }          	
+            }
+            count++;
+            guessValue.value = "";
+            guessValue.focus();
+		}
+
+		function gameOver(){
+			guessValue.disabled = true;
+			guessButton.disabled =true;
+			btn1 = document.createElement("button");
+			btn1.textContent = "start a new game";
+			document.body.appendChild(btn1);
+			btn1.addEventListener("click",resetNumber);
+		}
+
+		function resetNumber(){
+           count = 1;
+           var pLines = document.querySelectorAll("#result p");
+           for(var i=0;i<pLines.length;i++){
+           	pLines[i].textContent ="";
+           }
+           
+           btn1.parentNode .removeChild(btn1);
+           guessValue.disabled = false;
+           guessButton.disabled =false;
+           guessValue.value = "";
+           guessValue.focus();
+
+           randomNumber = Math.floor(Math.random()*100+1);
+		}
+	</script>
+</body>
+</html>
