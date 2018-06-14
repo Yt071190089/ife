@@ -3,6 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>9 * 9</title>
+	<style type="text/css">
+      table {
+        margin-top: 10px;
+        border-left: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      tr{
+        padding: 2px 5px;
+        border-right: 1px solid #d9d9d9;
+        border-top: 1px solid #d9d9d9;
+        font-size: 16px;
+        /* word-wrap: none; */
+        white-space: nowrap;
+      }	
+
+      th{
+      	font-weight: normal;
+      }	
+	</style>
 </head>
 <body>
 	<table>
@@ -16,7 +35,7 @@
 	var tbody = document.getElementById("tbody");
 		for(var i=1;i<10;i++){
 		   var ts = document.createElement("tr");
-		   for(var j=1;j<10;j++){
+		   for(var j=1;j<i+1;j++){
 		   	var tl = document.createElement("th");
 		   	var text = i+" * "+j+" = "+i*j;
 		   	tl.textContent =text;
