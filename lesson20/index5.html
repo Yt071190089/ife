@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sprite</title>
+	<style type="text/css">
+		#sprite{
+			width: 480px;
+			height: 480px;
+			background: url(animate.jpg);
+			background-position: 0px 0px;
+		}
+
+		#btn{
+          margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="sprite">
+	</div>
+	<button id="btn">开始</button>
+	<button id="close">结束</button>
+
+    <script type="text/javascript">
+    	var btn = document.getElementById("btn");
+    	var main = document.getElementById("sprite");
+    	var close = document.getElementById("close");
+    	var s=0,p=480;
+    	var h;
+    	btn.onclick = function(){
+    		var anmi=setInterval(sprite,100);
+    		function sprite(){
+                s= s-p;
+                h= s + "px";
+                main.style.backgroundPosition = "0px "+h;
+    			    if(s<-7200||s>-2){
+                p*=-1;
+               }
+    		}
+       close.onclick = function(){
+       	  clearInterval(anmi);
+       }      		
+    	}
+     
+    </script>
+</body>
+</html>
