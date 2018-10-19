@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+  <p id="show"></p>
+<script type="text/javascript">
+    var show = document.querySelector("#show");
+    //获取星期几
+    var arr=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
+    var arr1=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+	function weekday(day){
+      return arr[day];
+	}
+	function weekday1(day){
+		return arr1[day];
+	}
+	//数字位数补齐
+   function numFill(num){
+   	return num>=10? num : "0"+num;
+   }
+   //时间转换
+   function changeNumber(num){
+     return num>12? num-12:num;
+   }
+   function combineDate(data){
+     var obj={
+     	YYYY: data.getFullYear(),
+        MM: numFill(data.getMonth()+1) ,
+        DD: numFill(data.getDate()),
+        WK: weekday(data.getDay()),
+        hh: numFill(data.getHours()),
+        mm: numFill(data.getMinutes()),
+        ss: numFill(data.getSeconds()),   	
+     }
+    var Form1 = obj.YYYY+"年"+obj.MM+"月"+obj.DD+"日"+obj.WK+obj.hh+":"+obj.mm+":"+obj.ss;
+    return Form1;
+   }
+   function combineDate1(data){
+     var obj={
+     	YYYY: data.getFullYear(),
+        MM: numFill(data.getMonth()+1) ,
+        DD: numFill(data.getDate()),
+        WK: weekday1(data.getDay()),
+        hh: numFill(changeNumber(data.getHours())),
+        mm: numFill(data.getMinutes()),
+        ss: numFill(data.getSeconds()),
+        md: data.getHours()<12? "AM":"PM",  	
+     }
+    var Form2 = obj.YYYY+"-"+obj.MM+"-"+obj.DD+" "+obj.WK+" "+obj.hh+":"+obj.mm+":"+obj.ss+" "+obj.md;
+    return Form2;
+   }   
+   function countDown(){
+   	 var data = new Date();
+   	 show.innerText = combineDate(data);
+   	 setTimeout(countDown,1000);
+   }  
+   function countDown1(){
+   	 var data = new Date();
+   	 show.innerText = combineDate1(data);
+   	 setTimeout(countDown1,1000);   	
+   } 
+   countDown1();
+</script>
+</body>
+</html>

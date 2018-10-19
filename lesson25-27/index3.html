@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<select id="year-select">
+
+</select>
+
+<select id="month-select">
+
+</select>
+
+<select id="day-select">
+
+</select>
+
+<select id="hour-select">
+
+</select>
+
+<select id="minite-select">
+
+</select>
+
+<select id="second-select">
+
+</select>
+
+<p id="result-wrapper"></p>	
+<script type="text/javascript">
+	function numExtend(num){
+		return num>=10?num: "0"+num;
+	}
+
+	function appendOptions(sel,n){
+		var select= sel,
+		    option = document.createElement("option"),
+		    num;
+		if(select.id=="hour-select"||select.id=="minite-select"||select.id=="second-select"){
+            text= document.createTextNode(numExtend(n));
+		}
+		else {
+			text= document.createTextNode(n);
+		}
+		option.appendChild(text);
+		option.value= n,
+		select.appendChild(option);
+	}
+
+	function yearSelect(){
+		var select =document.querySelector("#year-select");
+		for(var i =2000;i<=2032;i++){
+            appendOptions(select,i);			
+		}
+	}
+
+    function removeOptions(sel){
+    	var select = document.querySelector("#day-select");
+        for(var i=select.length-1;i>=0;i--){
+        	select.remove(select.length-1);
+        }
+    }
+
+	function monthSelect(){
+		var select = document.querySelector("#month-select");
+		for(var i=0; i<=12;i++){
+			appendOptions(select,i);
+		}
+	}
+
+	function monthSelect(){
+		var select = document.querySelector("#month-select");
+		for(var i=1; i<=12;i++){
+			appendOptions(select,i);
+		}
+	}
+
+	function daySelect(){
+		var select= document.querySelector("#day-select");
+		var month= document.querySelector("#month-select");
+		//获取被选中的option
+		var index= month[month.selectedIndex].value;
+		// var index= month.value;
+		removeOptions();
+
+		if(index==1||index==3||index==5||index==7||index==8||index==10||index==12){
+			for(var i=1;i<=31;i++){
+				appendOptions(select,i);
+			}
+		}
+		if(index==4||index==6||index==9||index==11){
+			for(var i=1;i<=30;i++){
+				appendOptions(select,i);
+			}
+		}
+		if(index==2){
+			var year = document.querySelector("#year-select");
+			var yearIndex = year[year.selectedIndex].value;
+			if((yearIndex%4==0&&yearIndex%100!=0)||yearIndex%400==0){
+				for(var i=1;i<=29;i++){
+					appendOptions(select,i);
+				}
+			}
+			else {
+				for(var i=1;i<=28;i++){
+					appendOptions(select,i);
+				}
+			}
+		}
+	}
+
+	function hourSelect(){
+		var select = document.querySelector("#hour-select");
+		for(var i=0;i<=23;i++){
+			appendOptions(select,i);
+		}
+	}
+
+	function miniteSelect(){
+		var select = document.querySelector("#minite-select");
+		for(var i=0;i<=59;i++){
+			appendOptions(select,i);
+		}
+	}
+
+	function secondSelect(){
+		var select = document.querySelector("#second-select");
+		for(var i=0;i<=59;i++){
+			appendOptions(select,i);
+		}
+	}
+
+	yearSelect();
+    monthSelect();
+    daySelect();
+    hourSelect();
+    miniteSelect();
+    secondSelect();
+
+    document.getElementById("year-select").addEventListener("change",daySelect);
+    document.getElementById("month-select").addEventListener("change",daySelect);
+
+   function getWeek(date){
+   	var myDate= date;
+   	var weekday= {
+   		"0": "星期日",
+   		"1": "星期一",
+   		"2": "星期二",
+   		"3": "星期三",
+   		"4": "星期四",
+   		"5": "星期五",
+   		"6": "星期六",
+   	}
+   	return weekday[myDate.getDay()];
+   }
+
+    function getD(){
+    	var now = new Date(),
+    	yearsel = document.getElementById("year-select").value,
+    	monthsel = document.getElementById("month-select").value,
+    	daysel = document.getElementById("day-select").value,
+    	hoursel =document.getElementById("hour-select").value,
+    	minitesel = document.getElementById("minite-select").value,
+    	secondsel = document.getElementById("second-select").value,
+    	date = new Date(yearsel,monthsel,daysel,hoursel,minitesel,secondsel),
+    	result = document.getElementById("result-wrapper"),
+    	time,
+    	day,
+    	hour,
+    	minite,
+    	second,
+    	i,
+    	j,
+        k;
+    
+       if(now.getTime()>=date.getTime()){
+       	time= now.getTime()-date.getTime();
+       	day = Math.floor(time/(24*60*60*1000));
+
+       	i = time%(24*60*60*1000);
+       	hour= Math.floor(i/(60*60*1000));
+
+       	j = i%(60*60*1000);
+       	minite = Math.floor(j/(60*1000));
+
+       	k=i%(60*1000);
+       	second =Math.floor(k/1000);
+
+       	result.innerHTML="现在距离"+"&nbsp;"+yearsel+"年"+monthsel+"月"+daysel+"日"+getWeek(date)+"&nbsp;"+numExtend(hoursel)+"&#58;"+numExtend(minitesel)+"&#58;"+numExtend(secondsel)+"&nbsp;"+"已经过去"+day + "天" + hour + "小时" + minite + "分" + second + "秒";
+       }
+      else {
+      	time = date.getTime()-now.getTime();
+       	day = Math.floor(time/(24*60*60*1000));
+
+       	i = time%(24*60*60*1000);
+       	hour= Math.floor(i/(60*60*1000));
+
+       	j = i%(60*60*1000);
+       	minite = Math.floor(j/(60*1000));
+
+       	k=i%(60*1000);
+       	second =Math.floor(k/1000);
+
+       	result.innerHTML="现在距离"+"&nbsp;"+yearsel+"年"+monthsel+"月"+daysel+"日"+getWeek(date)+"&nbsp;"+numExtend(hoursel)+"&#58;"+numExtend(minitesel)+"&#58;"+numExtend(secondsel)+"&nbsp;"+"还有"+day + "天" + hour + "小时" + minite + "分" + second + "秒";      	
+      }
+
+    }
+   getD();
+   setInterval(getD,1000);
+   for(var i=0;i<document.querySelectorAll("select").length;i++){
+   	document.querySelectorAll("select")[i].onchange = getD;
+   }
+</script>
+</body>
+</html>
