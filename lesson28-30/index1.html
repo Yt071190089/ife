@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  <style type="text/css">
+   .wrapper{
+     width: 200px;
+   }
+   input{
+      width: 200px;
+   }
+  ul{
+      padding: 0;
+      margin: 0;
+      width: 206px;
+  }
+
+  li{
+      list-style: none;
+  }
+
+  .active{
+    background-color: pink;
+  }
+
+  ul li:hover{
+     background-color: blue;
+  }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+    <input id="email-input" type="text">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+</div>
+<script type="text/javascript">
+   window.onload = function(){
+    // 邮箱后缀List参考
+    var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];	
+    var inputText = document.querySelector("input");
+    var showText= document.querySelector("ul");
+    var ctx,ctxBefore,ctxAfter;
+    var posts=[];
+    inputText.focus();
+    
+    function ipt(e){
+       if(e.keyCode!=13&&e.keyCode!=38&&e.keyCode!=40&&e.keyCode!=27){
+        // resizeState();
+        getValue();
+        createCont();
+       }
+       else{
+         keyActions(e);
+       }
+    }
+
+    inputText.addEventListener("keyup",ipt);
+
+    function resizeState(){
+       var activeLi = document.querySelector(".active");
+       var defaultLi = document.querySelector("li");
+       if(activeLi!==defaultLi){
+          activeLi.setAttribute("class", "");
+          defaultLi.setAttribute("class", "active");
+       }
+
+    }
+
+    function keyActions(e){
+      var activeLi = document.querySelector(".active");
+      var first = document.querySelector("ul li:first-child");
+      var last = document.querySelector("ul li:last-child");
+      activeLi.setAttribute("class", "");
+      if(e.keyCode==38){
+          if(activeLi!==first){
+            activeLi.previousElementSibling.setAttribute("class", "active");
+          }
+          else {
+            last.setAttribute("class", "active");
+          }
+      }
+
+      if(e.keyCode==40){
+         console.log(activeLi!==last);
+          if(activeLi!==last){
+            activeLi.nextElementSibling.setAttribute("class", "active");
+          }
+          else {
+            first.setAttribute("class", "active");
+          }
+      }
+
+      if(e.keyCode==13){
+        var ctx = activeLi.innerText;
+        inputText.value = HtmlUtil.htmlDecode(ctx);
+        removeCont()
+      }
+
+      if(e.keyCode==27){
+        inputText.select();
+      }
+
+    }
+
+    function getValue(){
+      var text = inputText.value;
+      ctx = text.trim(); 
+      ctx = HtmlUtil.htmlEncode(ctx);
+      // console.log(ctx);
+    }
+
+    function createCont(){
+       removeCont();
+       if(ctx=="") return;
+        if (ctx.indexOf("@")!=-1) {
+         ctxBefore = ctx.split("@")[0];
+         ctxAfter = ctx.split("@")[1];
+         for(var i=0;i<postfixList.length;i++){
+          if(postfixList[i].indexOf(ctxAfter)!=-1){
+            var ele = document.createElement("li");
+            var eleTxt= document.createTextNode(ctxBefore+"@"+postfixList[i]);
+            ele.appendChild(eleTxt);
+            showText.appendChild(ele);
+          }
+         }
+        var num = document.querySelectorAll("li");
+        if(num.length==0){
+          for(var i=0;i<postfixList.length;i++){
+            var ele = document.createElement("li");
+            var eleTxt= document.createTextNode(ctxBefore+"@"+postfixList[i]);
+            ele.appendChild(eleTxt);
+            showText.appendChild(ele);            
+          }
+        }
+       }
+       else{
+         for(var i=0;i<postfixList.length;i++){
+            var ele = document.createElement("li");
+            var eleTxt= document.createTextNode(ctx+"@"+postfixList[i]);
+            ele.appendChild(eleTxt);
+            showText.appendChild(ele);            
+         }
+       }
+
+       showText.querySelector("li").setAttribute("class", "active");
+    }
+
+    function removeCont(){
+      var lists = document.querySelectorAll("li");
+      for(var i=0;i<lists.length;i++){
+        lists[i].remove();
+      }
+    }
+    
+   showText.addEventListener("click",function(e){
+       var target = e.target;
+       if(target.nodeName.toLowerCase()=="li"){
+       inputText.value = HtmlUtil.htmlDecode(target.innerText);
+       inputText.focus();
+       removeCont();
+       }
+   })
+
+    function addCont(){
+
+    }
+
+    function ctrCont(){
+
+    }
+
+    function showCont(){
+
+    }
+    function hideCont(){
+
+    }
+
+var HtmlUtil = {
+        /*1.用浏览器内部转换器实现html转码*/
+        htmlEncode:function (html){
+            //1.首先动态创建一个容器标签元素，如DIV
+            var temp = document.createElement ("div");
+            //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+            (temp.textContent != undefined ) ? (temp.textContent = html) : (temp.innerText = html);
+            //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+            var output = temp.innerHTML;
+            temp = null;
+            return output;
+        },
+        /*2.用浏览器内部转换器实现html解码*/
+        htmlDecode:function (text){
+            //1.首先动态创建一个容器标签元素，如DIV
+            var temp = document.createElement("div");
+            //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+            temp.innerHTML = text;
+            //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        },
+        /*3.用正则表达式实现html转码*/
+        htmlEncodeByRegExp:function (str){ 
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&/g,"&");
+             s = s.replace(/</g,"<");
+             s = s.replace(/>/g,">");
+             s = s.replace(/ /g," ");
+             s = s.replace(/\'/g,"'");
+             s = s.replace(/\"/g,'"');
+             return s; 
+       },
+       /*4.用正则表达式实现html解码*/
+       htmlDecodeByRegExp:function (str){ 
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&/g,"&");
+             s = s.replace(/</g,"<");
+             s = s.replace(/>/g,">");
+             s = s.replace(/ /g," ");
+             s = s.replace(/'/g,"\'");
+             s = s.replace(/"/g,"\"");
+             return s; 
+       }
+    };
+
+    }
+</script>	
+</body>
+</html>
