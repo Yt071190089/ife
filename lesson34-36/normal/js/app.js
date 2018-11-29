@@ -8,7 +8,7 @@ choose(regionCheck,"regall");
 choose(productCheck,"proall");
 
 renderBar(numsList());
-// renderLine(numsList());
+renderLine(numsList());
 
 //添加事件监听
 
