@@ -1,6 +1,14 @@
+function renderBar(){
 
-function renderBar(nums){
-    var numsList = nums;
+    function numsList(){
+    nums=[];
+    for(let i=0;i<list.length;i++){
+       nums.push(list[i]["sale"]);
+    }
+    return nums;
+    }
+    
+    var numsList = numsList();
     var xmls  = "http://www.w3.org/2000/svg";
     var barWrapper = document.getElementById("bar-wrapper");
     barWrapper.innerHTML = "";
