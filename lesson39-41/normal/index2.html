@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+    <button id="a" class="abc">A</button>
+    <button id="b" class="abc">B</button>
+    <button id="c" class="abc">C</button>
+
+    <button id="d" class="def">D</button>
+    <button id="e" class="def">E</button>
+    <button id="f" class="def">F</button>
+
+
+    <div id="contABC"></div>
+    <div id="contDEF"></div>
+
+<script type="text/javascript">
+    var btn2 = document.querySelectorAll("button");
+	var btn1 = document.querySelectorAll(".abc");
+	var btn2 = document.querySelectorAll(".def");
+	var contABC = document.querySelector("#contABC");
+	var contDEF = document.querySelector("#contDEF");
+	var arr = []
+    function getHash(){
+    	var hash = location.hash.slice(1);
+        hash = hash.toUpperCase();
+        return hash;
+    }
+
+    function renderFun(){
+    	var text = getHash();
+    	var text1 = text.slice(0,1);
+    	var text2 = text.slice(2,3);
+    	contABC.innerHTML = text1;
+    	contDEF.innerHTML = text2;
+    }
+
+window.addEventListener("click",function(e){
+    var target = e.target;
+    if(target.className=="abc"){
+      arr[0] = target.id;
+    }
+    else if(target.className=="def"){
+    	arr[1] = target.id
+    }
+    location.hash = arr.join(",");
+})     
+
+
+    window.onhashchange = renderFun;
+    renderFun();
+
+</script>	
+</body>
+</html>
