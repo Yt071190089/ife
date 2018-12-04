@@ -12,7 +12,7 @@ renderBar();
 renderLine();
 
 //添加事件监听
-wrap.addEventListener("click", function(e){
+window.addEventListener("click", function(e){
 	let str = getState();
 	console.log(str);
     history.pushState("state",null,"?"+str);

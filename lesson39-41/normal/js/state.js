@@ -1,5 +1,5 @@
 function getState(){
-	let box = document.querySelectorAll("#wrap input");
+	let box = document.querySelectorAll("input[type=checkbox]");
 	var str = "";
 	for(let i=0;i<box.length;i++){
 		if(box[i].checked == true){
@@ -16,7 +16,7 @@ function setState(){
 	if(location.search ==""){
 		location.search ="11111111";
 	}
-	let box = document.querySelectorAll("#wrap input");
+	let box = document.querySelectorAll("input[type=checkbox]");
 	let strArr = location.search.slice(1).split("");
 	for(let i=0;i<strArr.length;i++){
 		if(strArr[i]=="1"){
