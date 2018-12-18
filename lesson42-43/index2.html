@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>es6 面向对象 class</title>
+</head>
+<body>
+<script type="text/javascript">
+  class Restaurant{
+  	constructor(obj){
+  		this.cash = obj.cash;
+  		this.seats = obj.seats;
+  		this.staffList = obj.staff;
+  	}
+  	hire(staff){
+  		this.staffList.push(staff);
+  	}
+  	fire(staff){
+  		let arr=[];
+  		for(let i=0;i<this.staffList.length;i++){
+  			if(this.staffList[i].name!=staff.name||this.staffList[i].id!=staff.id){
+  				arr.push(this.staffList[i])
+  			}
+  		}
+  		this.staffList = arr;
+  	}
+  }
+
+  class Staff{
+  	constructor(id,name,salery){
+  		this.id = id;
+  		this.name= name;
+        this.salery = salery;
+  	}
+  	finishWork(){
+  		console.log('Work is finished');
+  	}
+  }
+
+  class Waiter extends Staff{
+  	 constructor(id,name,salery){
+  	 	super(id,name,salery);
+  	 }
+  	 finishWork(task){
+        if(Array.isArray(task)){
+        	console.log('the order is '+task);
+        } 
+        else{
+        	console.log(task);
+        } 	 	
+  	 }
+  }
+
+  class Cook extends Staff{
+  	constructor(id,name,salery){
+  		super(id,name,salery);
+  	}
+  	finishWork(dishes){
+  		console.log(dishes + " is done");
+  	}
+  }
+
+  class Customers{
+  	 constructor(){
+
+  	 }
+  	 order(order){
+  	 	console.log("the customers ordered " + order);
+  	 }
+  	 eat(){
+  	 	console.log('the food has been eaten up')
+  	 }
+  }
+
+  class Dishes{
+  	constructor(name,cost,price){
+  		this.name= name;
+  		this.cost = cost;
+  		this.price =price;
+  	}
+  }
+
+  let ifeRestaurant = new Restaurant({
+  	cash:1000000,
+  	seats:20,
+  	staff:[]
+  })
+  let newCook = new Cook("001", "Tony", 10000);
+  ifeRestaurant.hire(newCook);
+  console.log(ifeRestaurant.staffList);
+  ifeRestaurant.fire(newCook);
+  console.log(ifeRestaurant.staffList);
+</script>	
+</body>
+</html>

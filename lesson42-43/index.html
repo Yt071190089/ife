@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>es5 面向对象</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	function Restaurant(obj){
+        this.cash = obj.cash;
+        this.seats = obj.seats;
+        this.staffList = obj.staff;
+	}
+    Restaurant.prototype.hire = function(staff){
+    	this.staffList.push(staff);
+    };
+    Restaurant.prototype.fire = function(staff){
+    	let arr = [];
+    	for(let i=0;i<this.staffList.length;i++){
+    		if(this.staffList[i].id!=staff.id||this.staffList[i].name!=staff.name){
+    			arr.push(this.staffList[i]);
+    		}
+    	}
+    	this.staffList = arr;
+    };
+
+    function Staff(id,name,salery){
+          this.id = id;
+          this.name= name;
+          this.salery = salery;
+
+          this.finishWork = function(){
+          	console.log('work is finished');
+          }       
+    }
+
+    function Waiter(id,name,salery){
+         Staff.call(this,id,name,salery);
+    }
+
+    Waiter.prototype = Object.create(Staff.prototype);
+    Waiter.prototype.constructor = Waiter;
+    Waiter.prototype.finishWork = function(task){
+    	if(Array.isArray(task)){
+    		console.log('the order is '+task);
+    	}
+    	else {
+    		console.log(task);
+    	}
+    }
+
+    function Chef(id,name,salery){
+    	Staff.call(this,id,name,salery);
+    }
+
+    Chef.prototype = Object.create(Staff.prototype);
+    Chef.prototype.constructor = Chef;
+    Chef.prototype.finishWork = function(dishes){
+    	console.log(dishes+ " is done");
+    }
+
+    function Customer(){
+    	this.order = function(dishes){
+    		console.log("the dishes customer ordered is" + dishes);
+    	}
+    	this.eat = function () {
+            console.log("the dishes was eat up");
+        }
+    }
+
+    function Dishes(name,cost,price){
+        this.name= name;
+        this.cost = cost;
+        this.price= price;
+    }
+
+    let ifeRestaurant = new Restaurant({
+        cash: 1000000,
+        seats: 20,
+        staff: []
+    });
+    let chef = new Chef("001", "Tony", 10000);
+    ifeRestaurant.hire(chef);
+    console.log(ifeRestaurant.staffList);
+    ifeRestaurant.fire(chef);
+    console.log(ifeRestaurant.staffList);
+</script>
+</body>
+</html>
