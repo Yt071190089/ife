@@ -43,6 +43,9 @@ function operating(){
 	     				ul.appendChild(li);
 	     			}
 	     		cusStatus.appendChild(ul);
+          cus.cost(cus.dishes);
+          restaurant.cash -=cus.costPay;
+          resCash.innerHTML = `cash:${restaurant.cash}`;
 	     		clearInterval(timer);
 	     		}
 	     	},1000)

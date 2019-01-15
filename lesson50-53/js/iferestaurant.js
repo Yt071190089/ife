@@ -3,7 +3,8 @@
 class IfeRestaurant{
 	constructor(obj){
 		this.cash = obj.cash || 1000000;
-		this.seats = obj.seats ||1;
+		this.seats = obj.seats || 3;
+		this.state= obj.state ||[];
 		this.staff = obj.staff || [];
 	}
 
@@ -19,6 +20,7 @@ class IfeRestaurant{
 }
 
 let id = 1;
+let pos =0;
 
 class Staff{
 	constructor(name,salery){
@@ -30,19 +32,33 @@ class Staff{
 	finishWork(){}
 }
 
-class singleCook extends Staff{
-	constructor(name,salery,status){
+class Cook extends Staff{
+	constructor(name,salery){
 		super(name,salery,id);
-		this.status = "空闲中";
+		this.state =false;
+		this.status = this.name+"空闲中";
 	}
-	finishWork(arr){
-		let firstDishes = arr.shift();
+	createCook(){
+		let cooks= document.querySelector("#cooks");
+		let cook = document.createElement("div");
+		cook.setAttribute("id","cook"+this.id);
+		cook.setAttribute("class", "cook");
+		let str =`<span id="cook-status">${this.name}空闲中</span>
+                  <img src="images/cook.jpg" alt="">
+		          `;
+		cook.innerHTML = str;
+		cooks.appendChild(cook);
+		return cook;
+	}
+	finishWork(firstDishes,text){
+		// let firstDishes = arr.shift();
+		// console.log(firstDishes);
 		let _this = this;
 		return Promise.resolve().then(
 			function(){
 				if(firstDishes){
 					console.log('烹饪中......');
-					let t = firstDishes.cookingTime;
+					let t = firstDishes.cookingTime*text.length;
 					let timer = setInterval(() =>{
                          _this.status = `正在做${firstDishes.name},还需要${t-1}s`;
                          t--;
@@ -51,28 +67,45 @@ class singleCook extends Staff{
                          }
 					},1000);
 				}
-				return delay(firstDishes.cookingTime*1000);
+				return delay(firstDishes.cookingTime*1000*text.length);
 			}).then(function(){
 				console.log(`${firstDishes.name}做好了，上菜！`);
 				_this.status = '空闲中';
-				singleWaiter.getWaiter().finishWork(firstDishes.name);
+				// singleWaiter.getWaiter().finishWork(firstDishes.name);
 				return delay(50);
 			})
 	}
-	static getCook(name,salery){
-		if(!this.instance){
-			this.instance = new singleCook(name,salery);
-		}
-		return this.instance;
-	}
+	// static getCook(name,salery){
+	// 	if(!this.instance){
+	// 		this.instance = new singleCook(name,salery);
+	// 	}
+	// 	return this.instance;
+	// }
 }
 
-class singleWaiter extends Staff{
+class Waiter extends Staff{
 	constructor(name,salery){
 		super(name,salery,id);
+		this.state = false;
 	}
 
-	finishWork(task){
+	createWaiter(){
+		let waiters= document.querySelector("#waiters");
+		let waiter = document.createElement("div");
+		waiter.setAttribute("id","waiter"+this.id);
+		waiter.setAttribute("class", "waiter");
+		waiter.style.position = "absolute";
+		waiter.style.left = pos+"px";
+		pos =pos+60;
+
+		let str =`<p id="speak"></p>
+                  <img src="images/waiter.jpg" alt="">
+		          `;
+		waiter.innerHTML = str;
+		waiters.appendChild(waiter);
+	}    
+
+	finishWork(task,num){
 		if(Array.isArray(task)){
 			let arr=[];
 			for(let index in task){
@@ -87,12 +120,12 @@ class singleWaiter extends Staff{
 		}
 	}
 
-	static getWaiter(name,salery){
-		if(!this.instance){
-			this.instance = new singleWaiter(name,salery);
-		}
-		return this.instance;
-	}
+	// static getWaiter(name,salery){
+	// 	if(!this.instance){
+	// 		this.instance = new singleWaiter(name,salery);
+	// 	}
+	// 	return this.instance;
+	// }
 }
 
 class Dishes{

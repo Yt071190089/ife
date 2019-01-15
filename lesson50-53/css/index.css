@@ -1,0 +1,192 @@
+#content{
+	position: relative;
+	width:960px;
+	height: 640px;
+	background:#fff7cd;
+}
+
+#btn{
+	position: absolute;
+	top: 50px;
+	right: 25px;
+}
+
+#addWaiter{
+	position: absolute;
+	top: 100px;
+	right: 15px;
+}
+
+#addCook{
+	position: absolute;
+	top: 75px;
+	right: 20px;
+}
+
+#status{
+	position: absolute;
+	top:0;
+	right: 0;
+	width:120px;
+	background: #ddc4dd;
+}
+
+#cash{
+	display: inline-block;
+}
+
+#spare-seats{
+	display: inline-block;
+}
+
+#Todo{
+	position: absolute;
+	width:200px;
+	height: 200px;
+	top:0;
+	left: 0;
+}
+
+#Todo ul{
+	list-style: none;
+}
+
+#Todo ul li{
+	font-size: 12px;
+}
+
+#cooks{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 600px;
+	height:200px;
+	background: rgba(184,221,217,0.5);
+	display: flex;
+	padding-left: 200px;
+}
+
+.cook{
+	width: 150px;
+	padding-top: 20px;
+}
+
+.cook img{
+/*	position: absolute;
+	top:65px;
+	right:200px;*/
+	width: 100px;
+}
+
+.cook #cook-status{
+/*	position: absolute;
+	top:40px;
+	left: 200px;*/
+	display: inline-block;
+	padding-bottom: 20px;
+}
+
+#seats1{
+	position: absolute;
+	top:280px;
+	left:500px;
+	width: 260px;
+	height: 100px;
+	background: rgba(115,127,255,0.8);
+}
+
+#seats1 ul{
+	position: relative;
+	margin:0 auto;
+	right:-240px;
+	top:0;
+	list-style: none;
+}
+
+#seats1 ul li{
+	margin-left: 20px;
+	left: 10px;
+	font-size: 12px;
+}
+
+#seats2{
+	position: absolute;
+	top:400px;
+	left:500px;
+	width: 260px;
+	height: 100px;
+	background: rgba(115,127,255,0.8);
+}
+
+#seats2 ul{
+	position: relative;
+	margin:0 auto;
+	right:-240px;
+	top:0;
+	list-style: none;
+}
+
+#seats2 ul li{
+	margin-left: 20px;
+	left: 10px;
+	font-size: 12px;
+}
+
+#seats3{
+	position: absolute;
+	top:520px;
+	left:500px;
+	width: 260px;
+	height: 100px;
+	background: rgba(115,127,255,0.8);
+}
+
+#seats3 ul{
+	position: relative;
+	margin:0 auto;
+	right:-240px;
+	top:0;
+	list-style: none;
+}
+
+#seats3 ul li{
+	margin-left: 20px;
+	left: 10px;
+	font-size: 12px;
+}
+
+#queue{
+	position: absolute;
+	left: 20px;
+	top: 280px;
+	width: 80px;
+	height: 330px;
+	background: #ddcf00;
+}
+
+#waiters{
+	position: absolute;
+	top: 180px;
+	left: 310px;
+	width: 300px;
+	height: 100px;
+	transition: all 0.5s;
+/*	display: flex;*/
+}
+
+.waiter{
+	width:60px;
+	position: absolute;
+}
+
+.waiter img{
+/*	position: absolute;
+	bottom: 0;*/
+	width: 50px;
+}
+
+.waiter p{
+/*	position: absolute;
+	top: 0;
+	margin: 0 auto;*/
+}

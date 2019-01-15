@@ -132,13 +132,19 @@ class Customer{
 		this.needPay = 0;
 		this.count = [];
 		this.eaten = 0;
+		this.costPay =0;
 	}
 
 	order(){
 		let m = Math.floor(Math.random()*5) +1;
+		let nums=[];
 		for(let i=0;i<m;i++){
 			let n = Math.floor(Math.random()*menu.length);
+			while(nums.indexOf(n)>-1){
+				n = Math.floor(Math.random()*menu.length);
+			}
 			this.dishes.push(menu[n]);
+			nums.push(n);
 		}
 		console.log('点餐中......');
 	}
@@ -162,6 +168,16 @@ class Customer{
 		console.log('小二，结账');
 		console.log(`一共${this.needPay}元`);
         console.log("-------顾客离开了-------");
+	}
+	cost(arr){
+		let _this = this;
+		for(let i in arr){
+            for(let j in dishes){
+            	if(arr[i].name==dishes[j].name){
+            		_this.costPay +=dishes[j].cost;
+            	}
+            } 
+		}
 	}
 }
 
